@@ -20,7 +20,7 @@ def connect_to_sheet():
     ]
     creds = ServiceAccountCredentials.from_json_keyfile_dict(GOOGLE_SHEET_CREDS, scope)
     client = gspread.authorize(creds)
-    sheet = client.open(Instagram Caption Generator).sheet1
+    sheet = client.open("Instagram Caption Generator").sheet1
     return sheet
 
 # --- CAPTION GENERATION ---
