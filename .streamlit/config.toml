@@ -1,24 +1,8 @@
 [theme]
-base="light"
-
-[server]
-enableCORS = false
-
-[browser]
-gatherUsageStats = false
-
-[client]
-showSidebarNavigation = false
-
-[ui]
-hideMenu = true
-[browser]
-gatherUsageStats = false
+base = "light"
 
 [server]
 enableXsrfProtection = false
 
 [ui]
 hideTopBar = true
-
-
