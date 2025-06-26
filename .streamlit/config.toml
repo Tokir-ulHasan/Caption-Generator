@@ -12,4 +12,13 @@ showSidebarNavigation = false
 
 [ui]
 hideMenu = true
+[browser]
+gatherUsageStats = false
+
+[server]
+enableXsrfProtection = false
+
+[ui]
+hideTopBar = true
+
 
