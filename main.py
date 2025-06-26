@@ -43,40 +43,42 @@ def main():
     st.set_page_config(page_title="Instagram Caption Generator", page_icon="📸")
     st.title("📸 AI Instagram Caption Generator")
 
+    # Input for the topic
     topic = st.text_input("Enter a topic or keyword:")
 
+    # Generate Caption Button
     if st.button("✨ Generate Caption"):
-        if topic:
+        if topic.strip():  # Ensure topic is not empty or just spaces
             with st.spinner("Generating..."):
                 try:
                     caption = generate_caption(topic)
                     save_to_sheet(topic, caption)
-                   
                     st.success("✅ Caption Generated and Saved!")
-
-                     # Display the caption
+                    
+                    # Display the caption
                     st.markdown(f"**📝 Caption:** {caption}")
                     
                     # Copy button
                     st.copy_button("📋 Copy Caption", caption)
-                    st.write(f"**📝 Caption:** {caption}")
-                except Exception as e:
-                    st.error(f"Something went wrong: {e}")
-        else:
-            st.warning("⚠️ Please enter a topic!")
 
-    # Show caption history
+                except Exception as e:
+                    st.error(f"❌ Something went wrong: {e}")
+        else:
+            st.warning("⚠️ Please enter a valid topic!")
+
+    # Display recent caption history
     st.subheader("📜 Caption History (Last 5)")
     try:
         sheet = connect_to_sheet()
         records = sheet.get_all_records()
         if records:
             for row in reversed(records[-5:]):
-                st.markdown(f"- **{row['topic']}** → {row['caption']}")
+                st.markdown(f"- **{row.get('topic', 'N/A')}** → {row.get('caption', 'N/A')}")
         else:
             st.info("No captions saved yet.")
     except Exception as e:
-        st.error(f"Couldn't load sheet: {e}")
+        st.error(f"❌ Couldn't load sheet: {e}")
 
+# Run the app
 if __name__ == "__main__":
     main()
