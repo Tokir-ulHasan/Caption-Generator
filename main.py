@@ -51,9 +51,14 @@ def main():
                 try:
                     caption = generate_caption(topic)
                     save_to_sheet(topic, caption)
-                    st.code(caption, language='markdown')
-                    st.button("📋 Copy Caption", on_click=st.experimental_set_query_params, args=(("copied", "true"),))
+                   
                     st.success("✅ Caption Generated and Saved!")
+
+                     # Display the caption
+                    st.markdown(f"**📝 Caption:** {caption}")
+                    
+                    # Copy button
+                    st.copy_button("📋 Copy Caption", caption)
                     st.write(f"**📝 Caption:** {caption}")
                 except Exception as e:
                     st.error(f"Something went wrong: {e}")
